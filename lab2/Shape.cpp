@@ -7,20 +7,21 @@
 #include <QCursor>
 #include <stdexcept>
 
+Shape::Shape() {
+    cent = Point(0,0);
+}
+
 Shape::Shape(double x, double y): ang(0), cent(x,y), col(0,255,255){
     this->setPos(x,y);
 }
 Shape::Shape(QDataStream& stream) {
     stream >> figureRect;
-    std::cout << figureRect.x() << ' ' << figureRect.y() << ' ';
     QPoint qcent;
     stream >> qcent;
-    std::cout << qcent.rx() << ' ' << qcent.ry() << ' ';
     cent = Point(qcent.x(),qcent.y());
     QPointF pos;
     stream >> pos;
     setPos(pos);
-    std::cout << pos.rx() << ' ' << qcent.ry() << std::endl;
 }
 void Shape::changePos(double x, double y){
     for(auto& it: pts){
@@ -35,10 +36,7 @@ void Shape::changePos(double x, double y){
 Shape* Shape::loadFigure(QDataStream &stream) {
     QString type;
     stream >> type;
-//    if (type == "triangle") {
-//        return new RightTriangle(stream);
-//    } else if (type == "triangleWithCorners") {
-//        return new RightTriangleRoundedCorners(stream);
+
     if (type == "text") {
         return new Text(stream);
     } else if (type == "circle") {
@@ -50,16 +48,15 @@ Shape* Shape::loadFigure(QDataStream &stream) {
     } else {
         throw std::logic_error("Incorrect figure type");
     }
-
-    /*else {
-        return new TriangleText(stream);
-    }*/
 }
 Point Shape::getCentCoords() const {
     return cent;
 }
 QRectF Shape::boundingRect() const {
     return figureRect;
+}
+Colour Shape::getColour() const{
+    return col;
 }
 void Shape::changeColour(short r, short g, short b){
     col={r,g,b};

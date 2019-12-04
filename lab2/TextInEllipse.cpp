@@ -9,15 +9,7 @@ TextInEllipse::TextInEllipse(double x, double y, double r_1, double r_2, const Q
     fontSize = newFontSize;
     figureRect = QRectF(-r_1, -r_2, 2*r_1, 2*r_2);
 }
-TextInEllipse::TextInEllipse(QDataStream &stream)
-    : Shape(stream) {
-    stream >> radius_1;
-    stream >> radius_2;
-    stream >> text;
-    stream >> fontSize;
-    length = text.length();
-    std::cout << radius_1 << ' ' << radius_2 << ' ' << text.toStdString() << ' ' << fontSize << std::endl;
-}
+TextInEllipse::TextInEllipse(QDataStream &stream) : Shape(stream), Ellipse(stream), Text(stream) {}
 
 
 void TextInEllipse::saveToStream(QDataStream &stream) const {
@@ -29,8 +21,6 @@ void TextInEllipse::saveToStream(QDataStream &stream) const {
     stream << radius_2;
     stream << text;
     stream << fontSize;
-    std::cout << figureRect.x() << ' ' << figureRect.y() << ' ' << cent.x << ' ' << cent.y << ' ' << scenePos().rx() << ' ' << scenePos().ry() << std::endl;
-    std::cout << radius_1 << ' ' << radius_2 << ' ' << text.toStdString() << ' ' << fontSize << std::endl;
 }
 
 void TextInEllipse::print(std::ostream& out){
@@ -42,12 +32,10 @@ void TextInEllipse::print(std::ostream& out){
 void TextInEllipse::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     painter->setBrush(QColor(col.r, col.g, col.b));
     painter->drawEllipse(figureRect);
-
     painter->setPen(QPen(Qt::black, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     auto font = painter->font();
     font.setPointSize(fontSize);
     painter->setFont(font);
-
     painter->drawText(figureRect, Qt::AlignCenter, text);
 
     Q_UNUSED(option)

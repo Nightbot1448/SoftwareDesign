@@ -1,4 +1,4 @@
-#include "shapeview.h"
+#include "ShapeView.h"
 
 #include <QWheelEvent>
 #include <QtMath>

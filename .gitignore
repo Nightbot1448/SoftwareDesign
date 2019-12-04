@@ -36,11 +36,11 @@ cmake-build-debug
 info/tasks
 *.docx
 docs
-build
+build*
 
 .vs
 object_script.*
-KPO_2.pro.*
+SD_Lab2.pro.*
 Makefile*
 debug
 release

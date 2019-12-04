@@ -1,14 +1,12 @@
-#include "figuresscene.h"
-//#include "righttriangle.h"
-//#include "righttriangleroundedcorners.h"
+#include "FiguresScene.h"
 #include "Text.h"
 #include "Shape.h"
-//#include "triangletext.h"
 #include "Circle.h"
 #include "Ellipse.h"
 #include "TextInEllipse.h"
 #include <QMouseEvent>
 #include <QGraphicsSceneEvent>
+#include <stack>
 
 FiguresScene::FiguresScene(QObject *parent)
     : QGraphicsScene(parent) {
@@ -53,51 +51,6 @@ QString FiguresScene::getFigureType() const {
     return typeFigure;
 }
 
-//void FiguresScene::popFigure() {
-//    try {
-//        auto item = this->itemAt(figuresQueue.front()->getCentCoords().x, figuresQueue.front()->getCentCoords().y, QTransform::fromScale(1, 1));
-//        this->removeItem(item);
-//        figuresQueue.pop();
-//        figuresCount--;
-//    } catch (std::exception& e) {
-//        std::cout << e.what() << std::endl;
-//    }
-//}
-
-//void FiguresScene::serialize(QDataStream &stream) {
-//    stream << figuresQueue.size();
-//    while (figuresQueue.size()) {
-//        Shape *fig = figuresQueue.front();
-//        stream << *fig;
-//        popFigure();
-//    }
-//}
-
-//void FiguresScene::clearSFiguresScene() {
-//    this->clear();
-//    while (figuresQueue.size()) {
-//        figuresQueue.pop();
-//    }
-//}
-
-//void FiguresScene::deserialize(QDataStream &stream) {
-//    std::size_t figuresToLoadCount;
-//    stream >> figuresToLoadCount;
-//    if (figuresToLoadCount > 0) {
-//        clearSFiguresScene();
-//    } else {
-//        return;
-//    }
-//    for (size_t i = 0; i < figuresToLoadCount; i++) {
-//       Shape* figure = Shape::loadFigure(stream);
-//        if (figure) {
-//            this->addItem(figure);
-//            figuresCount++;
-//            figuresQueue.push(figure);
-//        }
-//    }
-//}
-
 void FiguresScene::popFigure() {
     try {
         auto fig = figuresContainer.pop()->elem();
@@ -109,21 +62,20 @@ void FiguresScene::popFigure() {
     }
 }
 
-void FiguresScene::serialize(QDataStream &stream) {
-    size_t cont_sz = figuresContainer.size();
-    std::cout << "count of figures: "<< cont_sz << std::endl;
-    stream << cont_sz;
-    while (cont_sz--) {
-        Shape *fig = figuresContainer.pop()->elem();
-        stream << *fig;
-    }
-}
-
 void FiguresScene::clearSFiguresScene() {
     this->clear();
     size_t cont_sz = figuresContainer.size();
     while (cont_sz--) {
         figuresContainer.pop();
+    }
+}
+
+void FiguresScene::serialize(QDataStream &stream) {
+    size_t cont_sz = figuresContainer.size();
+    stream << cont_sz;
+    while (cont_sz--) {
+        Shape *fig = figuresContainer.pop()->elem();
+        stream << *fig;
     }
 }
 
@@ -135,13 +87,21 @@ void FiguresScene::deserialize(QDataStream &stream) {
     } else {
         return;
     }
+    std::stack<Shape *> st;
     for (size_t i = 0; i < figuresToLoadCount; i++) {
        Shape* figure = Shape::loadFigure(stream);
         if (figure) {
-            this->addItem(figure);
-            figuresCount++;
-            figuresContainer.push(new nodeType(figure));
+            st.push(figure);
         }
+    }
+    while(st.size())
+    {
+        Shape* figure = st.top();
+        st.pop();
+        this->addItem(figure);
+        figuresCount++;
+        figuresContainer.push(new nodeType(figure));
+        std::cout << figuresCount;
     }
 }
 
@@ -163,7 +123,6 @@ void FiguresScene::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event) {
         shape->setPos(event->scenePos());
         this->addItem(shape);
         figuresCount++;
-//        figuresQueue.push(shape);
         figuresContainer.push(new nodeType(shape));
     }
 }

@@ -6,7 +6,6 @@
 #include <deque>
 #include "TreeNode.h"
 #include "EmptyErrorBT.h"
-//#include "BinaryTreeIterator.h"
 
 template <typename T>
 class BinaryTree {
@@ -43,11 +42,6 @@ template <typename T>
 BinaryTree<T>::BinaryTree() {
 	root_ = nullptr;
 }
-
-//template <typename T>
-//BinaryTreeIterator<T> BinaryTree<T>::iterator(){
-//	return BinaryTreeIterator<T>(*this);
-//}
 
 template <typename T>
 T* BinaryTree<T>::root() const { 
@@ -201,12 +195,10 @@ void BinaryTree<T>::clear()
 	root_ = nullptr;
 }
 
-
 template <typename T>
 BinaryTree<T>::~BinaryTree(){
     clear(root_);
 	root_ = nullptr;
 }
-
 
 #endif //SOFTWARE_DESIGN_BINARYTREE_H

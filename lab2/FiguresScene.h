@@ -4,7 +4,6 @@
 #include <QWidget>
 #include <QGraphicsScene>
 #include "Shape.h"
-//#include "priorityQueueContainer.h"
 #include "BinaryTree.h"
 #include <queue>
 

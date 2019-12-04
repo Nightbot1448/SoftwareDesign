@@ -1,7 +1,3 @@
-//
-// Created by dmo on 05.09.2019.
-//
-
 #ifndef SOFTWARE_DESIGN_TREENODE_H
 #define SOFTWARE_DESIGN_TREENODE_H
 

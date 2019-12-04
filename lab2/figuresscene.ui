@@ -27,8 +27,8 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>400</width>
-    <height>400</height>
+    <width>2100</width>
+    <height>2100</height>
    </size>
   </property>
   <property name="sizeIncrement">
@@ -60,8 +60,8 @@
      </property>
      <property name="maximumSize">
       <size>
-       <width>380</width>
-       <height>380</height>
+       <width>2080</width>
+       <height>2080</height>
       </size>
      </property>
      <property name="sizeIncrement">

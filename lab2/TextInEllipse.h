@@ -3,7 +3,7 @@
 #include "Ellipse.h"
 #include "Text.h"
 
-class TextInEllipse : virtual public Text, virtual public Ellipse{
+class TextInEllipse : virtual public Ellipse, virtual public Text{
 public:
     TextInEllipse(double x = 0, double y = 0, double r_1 = 0, double r_2 = 0, const QString& newText = "", int newFontSize = 0);
     TextInEllipse(QDataStream& stream);

@@ -1,10 +1,7 @@
-#include "figuresscenemdi.h"
+#include "FiguresSceneMDI.h"
 #include "ui_figuresscene.h"
-#include "shapeview.h"
-//#include "righttriangle.h"
-//#include "righttriangleroundedcorners.h"
+#include "ShapeView.h"
 #include "Text.h"
-//#include "triangletext.h"
 
 FiguresSceneMdi::FiguresSceneMdi(QWidget *parent) :
     QWidget(parent),

@@ -51,11 +51,11 @@ public:
     QLabel *label_4;
     QLineEdit *radius_2;
     QHBoxLayout *horizontalLayout_7;
-    QLabel *label_5;
-    QLineEdit *lineEditText;
-    QHBoxLayout *horizontalLayout_11;
     QLabel *label_3;
     QLineEdit *fontSize;
+    QHBoxLayout *horizontalLayout_11;
+    QLabel *label_5;
+    QLineEdit *lineEditText;
     QHBoxLayout *horizontalLayout_9;
     QSpacerItem *horizontalSpacer;
     QPushButton *clearScene;
@@ -161,44 +161,44 @@ public:
 
         horizontalLayout_7 = new QHBoxLayout();
         horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
-        label_5 = new QLabel(centralwidget);
-        label_5->setObjectName(QString::fromUtf8("label_5"));
+        label_3 = new QLabel(centralwidget);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
 
-        horizontalLayout_7->addWidget(label_5);
+        horizontalLayout_7->addWidget(label_3);
 
-        lineEditText = new QLineEdit(centralwidget);
-        lineEditText->setObjectName(QString::fromUtf8("lineEditText"));
-        lineEditText->setEnabled(false);
+        fontSize = new QLineEdit(centralwidget);
+        fontSize->setObjectName(QString::fromUtf8("fontSize"));
+        fontSize->setEnabled(false);
         QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Fixed);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(lineEditText->sizePolicy().hasHeightForWidth());
-        lineEditText->setSizePolicy(sizePolicy1);
-        lineEditText->setMinimumSize(QSize(140, 25));
-        lineEditText->setMaximumSize(QSize(140, 16777215));
+        sizePolicy1.setHeightForWidth(fontSize->sizePolicy().hasHeightForWidth());
+        fontSize->setSizePolicy(sizePolicy1);
+        fontSize->setMinimumSize(QSize(140, 25));
+        fontSize->setMaximumSize(QSize(140, 16777215));
 
-        horizontalLayout_7->addWidget(lineEditText);
+        horizontalLayout_7->addWidget(fontSize);
 
 
         verticalLayout_10->addLayout(horizontalLayout_7);
 
         horizontalLayout_11 = new QHBoxLayout();
         horizontalLayout_11->setObjectName(QString::fromUtf8("horizontalLayout_11"));
-        label_3 = new QLabel(centralwidget);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_5 = new QLabel(centralwidget);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
 
-        horizontalLayout_11->addWidget(label_3);
+        horizontalLayout_11->addWidget(label_5);
 
-        fontSize = new QLineEdit(centralwidget);
-        fontSize->setObjectName(QString::fromUtf8("fontSize"));
-        fontSize->setEnabled(false);
-        sizePolicy1.setHeightForWidth(fontSize->sizePolicy().hasHeightForWidth());
-        fontSize->setSizePolicy(sizePolicy1);
-        fontSize->setMinimumSize(QSize(30, 0));
-        fontSize->setBaseSize(QSize(30, 0));
-        fontSize->setFrame(true);
+        lineEditText = new QLineEdit(centralwidget);
+        lineEditText->setObjectName(QString::fromUtf8("lineEditText"));
+        lineEditText->setEnabled(false);
+        sizePolicy1.setHeightForWidth(lineEditText->sizePolicy().hasHeightForWidth());
+        lineEditText->setSizePolicy(sizePolicy1);
+        lineEditText->setMinimumSize(QSize(30, 0));
+        lineEditText->setBaseSize(QSize(30, 0));
+        lineEditText->setFrame(true);
 
-        horizontalLayout_11->addWidget(fontSize);
+        horizontalLayout_11->addWidget(lineEditText);
 
 
         verticalLayout_10->addLayout(horizontalLayout_11);
@@ -243,7 +243,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 1146, 26));
+        menubar->setGeometry(QRect(0, 0, 1146, 21));
         menu = new QMenu(menubar);
         menu->setObjectName(QString::fromUtf8("menu"));
         MainWindow->setMenuBar(menubar);
@@ -275,8 +275,8 @@ public:
         label_2->setText(QApplication::translate("MainWindow", "\320\240\320\260\320\264\320\270\321\203\321\201 \320\276\320\272\321\200\321\203\320\266\320\275\320\276\321\201\321\202\320\270/\320\263\320\276\321\200\320\270\320\267\320\276\320\275\321\202\320\260\320\273\321\214\320\275\321\213\320\271 \321\200\320\260\320\264\320\270\321\203\321\201 \321\215\320\273\320\273\320\270\320\277\321\201\320\260", nullptr));
         radius_1->setText(QString());
         label_4->setText(QApplication::translate("MainWindow", "\320\222\320\265\321\200\321\202\320\270\320\272\320\260\320\273\321\214\320\275\321\213\320\271 \321\200\320\260\320\264\320\270\321\203\321\201 \321\215\320\273\320\273\320\270\320\277\321\201\320\260", nullptr));
-        label_5->setText(QApplication::translate("MainWindow", "\320\242\320\265\320\272\321\201\321\202", nullptr));
         label_3->setText(QApplication::translate("MainWindow", "\320\240\320\260\320\267\320\274\320\265\321\200 \321\210\321\200\320\270\321\204\321\202\320\260", nullptr));
+        label_5->setText(QApplication::translate("MainWindow", "\320\242\320\265\320\272\321\201\321\202", nullptr));
         clearScene->setText(QApplication::translate("MainWindow", "\320\236\321\207\320\270\321\201\321\202\320\270\321\202\321\214 \321\201\321\205\320\265\320\274\321\203", nullptr));
         newSceneButton->setText(QApplication::translate("MainWindow", "\320\235\320\276\320\262\320\260\321\217 \321\201\321\206\320\265\320\275\320\260", nullptr));
         deleteButton->setText(QApplication::translate("MainWindow", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214 \321\204\320\270\320\263\321\203\321\200\321\203", nullptr));

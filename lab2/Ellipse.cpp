@@ -20,6 +20,15 @@ void Ellipse::saveToStream(QDataStream &stream) const {
 void Ellipse::print(std::ostream& out){
     out<< "Радиус 1 "<< radius_1 << "; Радиус 2: "<< radius_2 << "\n";
 }
+
+double Ellipse::getRadius1() {
+    return radius_2;
+}
+
+double Ellipse::getRadius2() {
+    return radius_1;
+}
+
 void Ellipse::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     painter->setBrush(QColor(col.r, col.g, col.b));     // Устанавливаем кисть, которой будем отрисовывать объект
     painter->drawEllipse(figureRect);

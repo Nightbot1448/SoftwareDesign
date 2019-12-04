@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "figuresscene.h"
-#include "figuresscenemdi.h"
+#include "FiguresScene.h"
+#include "FiguresSceneMDI.h"
 
 #include <QMdiSubWindow>
 #include <QMdiArea>
@@ -16,12 +16,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     this->setWindowTitle("Лабораторная №2");
-
-//    this->setFixedSize(QSize(this->width(), this->height()));
-
     auto newWindow = new FiguresSceneMdi(ui->mdiArea);
     auto newFiguresScene = ui->mdiArea->addSubWindow(newWindow);
-//    newFiguresScene->setFixedSize(QSize(400, 400));
     newFiguresScene->setWindowTitle("Сцена");
 }
 
@@ -162,7 +158,6 @@ void MainWindow::on_newSceneButton_clicked()
     newWindow->figureScene->setFigureText(ui->lineEditText->displayText());
     newWindow->figureScene->setFigureFontSize(ui->fontSize->displayText().toInt());
     setEnabledFields(figure);
-
 
     newWindow->show();
 }

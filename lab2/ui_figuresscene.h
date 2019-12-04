@@ -35,7 +35,7 @@ public:
         sizePolicy.setHeightForWidth(FiguresSceneMdi->sizePolicy().hasHeightForWidth());
         FiguresSceneMdi->setSizePolicy(sizePolicy);
         FiguresSceneMdi->setMinimumSize(QSize(200, 200));
-        FiguresSceneMdi->setMaximumSize(QSize(400, 400));
+        FiguresSceneMdi->setMaximumSize(QSize(2100, 2100));
         FiguresSceneMdi->setSizeIncrement(QSize(1, 1));
         FiguresSceneMdi->setBaseSize(QSize(320, 320));
         gridLayout_2 = new QGridLayout(FiguresSceneMdi);
@@ -44,7 +44,7 @@ public:
         graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
         graphicsView->setEnabled(true);
         graphicsView->setMinimumSize(QSize(180, 180));
-        graphicsView->setMaximumSize(QSize(380, 380));
+        graphicsView->setMaximumSize(QSize(2080, 2080));
         graphicsView->setSizeIncrement(QSize(1, 1));
         graphicsView->setBaseSize(QSize(300, 300));
         graphicsView->setDragMode(QGraphicsView::NoDrag);

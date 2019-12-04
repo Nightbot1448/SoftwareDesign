@@ -8,6 +8,7 @@ public:
     Circle(QDataStream& stream);
     void saveToStream(QDataStream& stream) const override;
 
+    double getRadius();
     void print(std::ostream& out) override;
 
 protected:

@@ -169,14 +169,14 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_7">
             <item>
-             <widget class="QLabel" name="label_5">
+             <widget class="QLabel" name="label_3">
               <property name="text">
-               <string>Текст</string>
+               <string>Размер шрифта</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEditText">
+             <widget class="QLineEdit" name="fontSize">
               <property name="enabled">
                <bool>false</bool>
               </property>
@@ -205,14 +205,14 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_11">
             <item>
-             <widget class="QLabel" name="label_3">
+             <widget class="QLabel" name="label_5">
               <property name="text">
-               <string>Размер шрифта</string>
+               <string>Текст</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="fontSize">
+             <widget class="QLineEdit" name="lineEditText">
               <property name="enabled">
                <bool>false</bool>
               </property>
@@ -259,7 +259,7 @@
             <item>
              <widget class="QPushButton" name="clearScene">
               <property name="text">
-               <string>Очистить схему</string>
+               <string>Очистить сцену</string>
               </property>
              </widget>
             </item>
@@ -317,7 +317,7 @@
      <x>0</x>
      <y>0</y>
      <width>1146</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -335,10 +335,16 @@
    <property name="text">
     <string>Открыть</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
   </action>
   <action name="saveAction">
    <property name="text">
     <string>Сохранить</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
    </property>
   </action>
  </widget>

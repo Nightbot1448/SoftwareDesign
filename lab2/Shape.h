@@ -3,14 +3,15 @@
 #include <QDataStream>
 #include <QGraphicsObject>
 #include <QGraphicsSceneMouseEvent>
+#include "includes.h"
 
 class FiguresScene;
-#include "headers.h"
 
 class Shape: public QGraphicsObject{
     friend class FiguresScene;
 public:
-    Shape(double x = 0, double y = 0);
+    Shape();
+    Shape(double x, double y);
     Shape(QDataStream& stream);
     static Shape* loadFigure(QDataStream& stream);
     virtual void changePos(double x, double y);
@@ -19,6 +20,7 @@ public:
     virtual void forPrint(std::ostream& out);
     virtual void changeColour(short r, short g, short b);
     Point getCentCoords() const;
+    Colour getColour() const;
     virtual void print(std::ostream& out) = 0;
 
     friend std::ostream& operator<<(std::ostream& out, Shape& sh){
@@ -29,7 +31,7 @@ public:
     virtual ~Shape(){}
 
 protected:
-    Point cent = Point(0,0);
+    Point cent;
     int ang = 0;
     Colour col = Colour(0,255,255);
     std:: vector<Point> pts;

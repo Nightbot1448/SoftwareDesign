@@ -1,7 +1,3 @@
-//
-// Created by dmo on 09.10.2019.
-//
-
 #ifndef SOFTWARE_DESIGN_EMPYERRORBT_H
 #define SOFTWARE_DESIGN_EMPYERRORBT_H
 

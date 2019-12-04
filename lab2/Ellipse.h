@@ -10,6 +10,9 @@ public:
 
     void print(std::ostream& out) override;
 
+    double getRadius1();
+    double getRadius2();
+
 protected:
     double radius_1;
     double radius_2;

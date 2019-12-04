@@ -1,7 +1,7 @@
 #ifndef FIGURESSCENEMDI_H
 #define FIGURESSCENEMDI_H
 
-#include "figuresscene.h"
+#include "FiguresScene.h"
 #include "mainwindow.h"
 #include <QWidget>
 

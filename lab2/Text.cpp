@@ -26,17 +26,14 @@ void Text::print(std::ostream& out){
     out<<"Текст "<< text.toStdString() <<"\n";
 }
 void Text::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
-//    painter->setPen(Qt::white);
-//    painter->setBrush(Qt::white);
-//    painter->drawRect(figureRect);
-
     painter->setPen(QPen(Qt::black, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     painter->setBrush(QColor(col.r, col.g, col.b));
     auto font = painter->font();
     font.setPointSize(fontSize);
     painter->setFont(font);
-
     painter->drawText(figureRect, text);
+
+
     Q_UNUSED(option)
     Q_UNUSED(widget)
 }

@@ -18,14 +18,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     Circle.cpp \
     Ellipse.cpp \
+    FiguresScene.cpp \
+    FiguresSceneMDI.cpp \
     Shape.cpp \
+    ShapeView.cpp \
     Text.cpp \
     TextInEllipse.cpp \
-    figuresscene.cpp \
-    figuresscenemdi.cpp \
     main.cpp \
-    mainwindow.cpp \
-    shapeview.cpp
+    mainwindow.cpp
 
 HEADERS += \
     BTException.h \
@@ -34,16 +34,16 @@ HEADERS += \
     Circle.h \
     Colour.h \
     EmpyErrorBT.h \
+    FiguresScene.h \
+    FiguresSceneMDI.h \
     Point.h \
     Shape.h \
+    ShapeView.h \
     Text.h \
     TextInEllipse.h \
     TreeNode.h \
-    figuresscene.h \
-    figuresscenemdi.h \
-    headers.h \
-    mainwindow.h \
-    shapeview.h
+    includes.h \
+    mainwindow.h
 
 FORMS += \
     figuresscene.ui \
