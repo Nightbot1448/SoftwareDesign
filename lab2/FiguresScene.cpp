@@ -7,6 +7,7 @@
 #include <QMouseEvent>
 #include <QGraphicsSceneEvent>
 #include <stack>
+#include "Line.h"
 
 FiguresScene::FiguresScene(QObject *parent)
     : QGraphicsScene(parent) {
@@ -68,6 +69,9 @@ void FiguresScene::clearSFiguresScene() {
     while (cont_sz--) {
         figuresContainer.pop();
     }
+//    Line *l = new Line(QPoint(20,10), QPoint(120,100));
+//    this->addItem(l);
+//    this->removeItem(l);
 }
 
 void FiguresScene::serialize(QDataStream &stream) {
@@ -120,9 +124,23 @@ void FiguresScene::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event) {
             shape = new TextInEllipse(event->scenePos().rx(), event->scenePos().ry(), this->radius_1, this->radius_2, this->figureText, this->fontSize);
         }
 
+        figuresCount++;
+        nodeType *parent = figuresContainer.push(new nodeType(shape));
+        if (parent){
+            this->removeItem(parent->elem());
+            if(parent->right()){
+                parent->setRightLine(new Line(parent->elem()->getCentCoords(), shape->getCentCoords()));
+                this->addItem(parent->getRightLine());
+            }
+            else {
+                parent->setLeftLine(new Line(parent->elem()->getCentCoords(), shape->getCentCoords()));
+                this->addItem(parent->getLeftLine());
+            }
+            this->addItem(parent->elem());
+        }
+
         shape->setPos(event->scenePos());
         this->addItem(shape);
-        figuresCount++;
-        figuresContainer.push(new nodeType(shape));
+
     }
 }

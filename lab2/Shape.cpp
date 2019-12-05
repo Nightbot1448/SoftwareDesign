@@ -77,17 +77,18 @@ void Shape::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
     this->setPos(mapToScene(event->pos()));
     this->cent.x = mapToScene(event->pos()).x();
     this->cent.y = mapToScene(event->pos()).y();
+    std::cout << this->cent.x << ' ' << this->cent.y << std::endl;
 }
 
 void Shape::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     this->setCursor(QCursor(Qt::ClosedHandCursor));
-
+    std::cout << "Mouse press event" << std::endl;
     Q_UNUSED(event)
 }
 void Shape::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
     this->setCursor(QCursor(Qt::ArrowCursor));
-
     Q_UNUSED(event)
+    std::cout << "Mouse release event" << std::endl;
 }
 QDataStream& operator<<(QDataStream& stream, const Shape& shape) {
     shape.saveToStream(stream);

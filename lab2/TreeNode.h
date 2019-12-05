@@ -2,12 +2,15 @@
 #define SOFTWARE_DESIGN_TREENODE_H
 
 #include <utility>
+#include <QGraphicsObject>
 
 template<typename T>
 class TreeNode{
     T elem_;
     TreeNode *left_;
     TreeNode *right_;
+    QGraphicsObject *left_line_;
+    QGraphicsObject *right_line_;
 public:
 	
     explicit TreeNode(T base);
@@ -22,6 +25,12 @@ public:
     TreeNode *&left();
     void left(T left);
     void left(TreeNode *left);
+
+    QGraphicsObject *getLeftLine();
+    void setLeftLine(QGraphicsObject *);
+
+    QGraphicsObject *getRightLine();
+    void setRightLine(QGraphicsObject *);
 
     TreeNode *&right();
     void right(T right);
@@ -74,8 +83,26 @@ template<typename T>
 void TreeNode<T>::right(T right) { right_ = new TreeNode<T>(right); }
 
 template<typename T>
-void TreeNode<T>::right(TreeNode *right) {
-    right_ = right;
+void TreeNode<T>::right(TreeNode *right) { right_ = right; }
+
+template<typename T>
+QGraphicsObject *TreeNode<T>::getLeftLine(){
+    return left_line_;
+}
+
+template<typename T>
+void TreeNode<T>::setLeftLine(QGraphicsObject *l){
+    left_line_ = l;
+}
+
+template<typename T>
+QGraphicsObject *TreeNode<T>::getRightLine(){
+    return right_line_;
+}
+
+template<typename T>
+void TreeNode<T>::setRightLine(QGraphicsObject *l){
+    right_line_ = l;
 }
 
 template<typename T>

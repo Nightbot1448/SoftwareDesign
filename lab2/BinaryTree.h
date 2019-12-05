@@ -22,7 +22,7 @@ public:
     void print_klp();
     void clear(T* node);
     void clear();
-	void push(T *);
+    T*  push(T *); //return parent pointer
 	T* pop();
 
     size_t size();
@@ -49,7 +49,7 @@ T* BinaryTree<T>::root() const {
 }
 
 template <typename T>
-void BinaryTree<T>::push(T *elem) {
+T *BinaryTree<T>::push(T *elem) {
 	if (root_) {
 		std::queue<T*> current;
 		current.push(root_);
@@ -64,7 +64,7 @@ void BinaryTree<T>::push(T *elem) {
 				}
 				else { 
 					el->left(elem);
-					return;
+                    return el;
 				}
 				if (el->right()) {
 					next.push(el->right());
@@ -72,7 +72,7 @@ void BinaryTree<T>::push(T *elem) {
 				else
 				{
 					el->right(elem);
-					return;
+                    return el;
 				}
 			}
 			queue_sz = next.size();
@@ -81,6 +81,7 @@ void BinaryTree<T>::push(T *elem) {
 	}
 	else {
 		root_ = elem;
+        return nullptr;
 	}
 }
 

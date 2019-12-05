@@ -20,6 +20,7 @@ SOURCES += \
     Ellipse.cpp \
     FiguresScene.cpp \
     FiguresSceneMDI.cpp \
+    Line.cpp \
     Shape.cpp \
     ShapeView.cpp \
     Text.cpp \
@@ -36,6 +37,7 @@ HEADERS += \
     EmpyErrorBT.h \
     FiguresScene.h \
     FiguresSceneMDI.h \
+    Line.h \
     Point.h \
     Shape.h \
     ShapeView.h \
