@@ -113,12 +113,30 @@ void FiguresScene::deserialize(QDataStream &stream) {
     }
     while(st.size())
     {
-        Shape* figure = st.top();
+        Shape* shape = st.top();
         st.pop();
-        this->addItem(figure);
         figuresCount++;
-        figuresContainer.push(new nodeType(figure));
-        std::cout << figuresCount;
+        nodeType* parent = figuresContainer.push(new nodeType(shape));
+        if (parent) {
+            this->removeItem(parent->elem());
+            if (parent->right()) {
+                parent->setRightLine(new Line(parent->elem()->getCentCoords(), shape->getCentCoords()));
+                parent->right()->setParent(parent);
+                shape->setOwnerNode(parent->right());
+                this->addItem(parent->getRightLine());
+            }
+            else {
+                parent->setLeftLine(new Line(parent->elem()->getCentCoords(), shape->getCentCoords()));
+                parent->left()->setParent(parent);
+                shape->setOwnerNode(parent->left());
+                this->addItem(parent->getLeftLine());
+            }
+            this->addItem(parent->elem());
+        }
+        else {
+            shape->setOwnerNode(figuresContainer.root());
+        }
+        this->addItem(shape);
     }
 }
 
@@ -139,8 +157,7 @@ void FiguresScene::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event) {
         shape->setCurrentScene(this);
         figuresCount++;
 
-        nodeType *parent =
-                figuresContainer.push(new nodeType(shape));
+        nodeType *parent = figuresContainer.push(new nodeType(shape));
 
         if (parent){
             this->removeItem(parent->elem());

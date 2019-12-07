@@ -132,7 +132,6 @@ T *BinaryTree<T>::push(T *elem) {
 //				}
 //				size_t previous_sz = previous.size();
 //				size_t current_sz = current.size();
-
 //				if (current_sz != 2 * previous_sz) {
 //                    TreeNode<Shape *> *parent = previous[(current_sz-1) / 2];
 //                    if (current_sz % 2) {

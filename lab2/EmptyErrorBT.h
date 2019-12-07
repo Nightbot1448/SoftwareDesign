@@ -19,4 +19,10 @@ public:
             : BTException(msg) {}
 };
 
+class ParentChildError : public BTException {
+public:
+    inline explicit ParentChildError(const char* msg)
+        : BTException(msg) {}
+};
+
 #endif //SOFTWARE_DESIGN_EMPYERRORBT_H

@@ -3,6 +3,9 @@
 #include "Circle.h"
 #include "Ellipse.h"
 #include "TextInEllipse.h"
+#include "Line.h"
+#include "EmptyErrorBT.h"
+#include <QGraphicsScene>
 #include <QGraphicsSceneEvent>
 #include <QCursor>
 #include <stdexcept>
@@ -100,11 +103,70 @@ void Shape::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
 
 void Shape::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     this->setCursor(QCursor(Qt::ClosedHandCursor));
-    TreeNode<Shape *> *parent = owner_node_;
+    TreeNode<Shape*>* node = owner_node_;
+    TreeNode<Shape*>* parent = node->getParent();
+    if (parent) {
+        if (parent->left() == node)
+        {
+            delete parent->getLeftLine();
+            parent->setLeftLine(nullptr);
+        }
+        else if (parent->right() == node) {
+            delete parent->getRightLine();
+            parent->setRightLine(nullptr);
+        }
+        else
+            throw ParentChildError("child of parent != node");
+    }
+    if (node->left())
+    {
+        delete node->getLeftLine();
+        node->setLeftLine(nullptr);
+    }
+    if (node->right()) {
+        delete node->getRightLine();
+        node->setRightLine(nullptr);
+    }
     Q_UNUSED(event)
 }
 void Shape::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
     this->setCursor(QCursor(Qt::ArrowCursor));
+    this->setCursor(QCursor(Qt::ClosedHandCursor));
+    TreeNode<Shape*>* node = owner_node_;
+    TreeNode<Shape*>* parent = node->getParent();
+    auto scene = getCurrentScene();
+    scene->removeItem(this);
+    if (parent) {
+        scene->removeItem(parent->elem());
+        if (parent->left() == node)
+        {
+            parent->setLeftLine(new Line(parent->elem()->getCentCoords(), cent));
+            scene->addItem(parent->getLeftLine());
+        }
+        else if (parent->right() == node) {
+            parent->setRightLine(new Line(parent->elem()->getCentCoords(), cent));
+            scene->addItem(parent->getRightLine());
+        }
+        else
+            throw ParentChildError("child of parent != node");
+        scene->addItem(parent->elem());
+    }
+    auto left_child = node->left();
+    auto right_child = node->right();
+    if (left_child)
+    {
+        scene->removeItem(left_child->elem());
+        node->setLeftLine(new Line(cent, left_child->elem()->getCentCoords()));
+        scene->addItem(node->getLeftLine());
+        scene->addItem(left_child->elem());
+    }
+    if (right_child) {
+        scene->removeItem(right_child->elem());
+        node->setRightLine(new Line(cent, node->right()->elem()->getCentCoords()));
+        scene->addItem(node->getRightLine());
+        scene->addItem(right_child->elem());
+    }
+    scene->addItem(this);
     Q_UNUSED(event)
 }
 
