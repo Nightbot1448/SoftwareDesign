@@ -15,36 +15,30 @@ int main(int argc, char **argv)
     Shape *shape_1 = new Ellipse(Point(1,2), 1, 2);
     Shape *shape_2 = new Text("text", 8);
     Shape *shape_3 = new TextInEllipse("text in ellipse", 8, Point(1, 2), 2, 3);*/
-	int a = 0;
-	int b = 1;
-	int c = 2;
-	int d = 3;
-	nodeType* node0 = new nodeType(a);
-	nodeType *node1 = new nodeType(b);
-    nodeType *node2 = new nodeType(c);
-	nodeType* node3 = new nodeType(d);
+	
     
     try {
 		
         BinaryTree<nodeType> tree;
-		tree.push(node0);
-		tree.push(node1);
-		tree.push(node2);
-		tree.push(node3);
-//        BinaryTree<nodeType> tree(nullptr);
+		tree.push(new nodeType(0));
+		tree.push(new nodeType(1));
+		tree.push(new nodeType(2));
+		tree.push(new nodeType(3));
+		tree.push(new nodeType(4));
+		tree.push(new nodeType(5));
+		tree.push(new nodeType(6));
+		tree.push(new nodeType(7));
+		tree.push(new nodeType(8));
+		tree.push(new nodeType(9));
+
         BinaryTreeIterator<nodeType> iter = tree.iterator();
 
-        while(iter.has_next()) {
-            std::cout << iter.next().elem() << ' ';
-        }
-		auto el = tree.pop();
-		std::cout << std::endl << el->elem() << std::endl;
-		
-		iter = tree.iterator();
-		while (iter.has_next()) {
-			std::cout << iter.next().elem() << ' ';
+		size_t sz = tree.size();
+		while (sz--) {
+			auto el = tree.pop();
+			std::cout << el->elem() << std::endl;
 		}
-		el = tree.pop();
+		/*el = tree.pop();
 		std::cout << std::endl << el->elem() << std::endl;
 
 		iter = tree.iterator();
@@ -59,7 +53,7 @@ int main(int argc, char **argv)
 			std::cout << iter.next().elem() << ' ';
 		}
 
-		el = tree.pop();
+		el = tree.pop();*/
 
 		tree.clear();
 		

@@ -34,7 +34,7 @@ HEADERS += \
     Ellipse.h \
     Circle.h \
     Colour.h \
-    EmpyErrorBT.h \
+    EmptyErrorBT.h \
     FiguresScene.h \
     FiguresSceneMDI.h \
     Line.h \

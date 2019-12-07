@@ -11,7 +11,7 @@ Shape::Shape() {
     cent = Point(0,0);
 }
 
-Shape::Shape(double x, double y): ang(0), cent(x,y), col(0,255,255){
+Shape::Shape(double x, double y): cent(x,y), ang(0), col(0,255,255){
     this->setPos(x,y);
 }
 Shape::Shape(QDataStream& stream) {
@@ -23,6 +23,7 @@ Shape::Shape(QDataStream& stream) {
     stream >> pos;
     setPos(pos);
 }
+
 void Shape::changePos(double x, double y){
     for(auto& it: pts){
         it.x+=x - cent.x;
@@ -62,6 +63,22 @@ void Shape::changeColour(short r, short g, short b){
     col={r,g,b};
 }
 
+QGraphicsScene *Shape::getCurrentScene(){
+    return parrent_scene_;
+}
+
+void Shape::setCurrentScene(QGraphicsScene *sc){
+    parrent_scene_ = sc;
+}
+
+TreeNode<Shape *> *Shape::getOwnerNode() {
+    return owner_node_;
+}
+
+void Shape::setOwnerNode(TreeNode<Shape *> *n) {
+    owner_node_ = n;
+}
+
 void Shape::forPrint(std::ostream& out){
     out<<"Центр. коорд. "<<cent.x<<" "<<cent.y<<std::endl;
     out<<"Угол поворота "<<ang<<std::endl;
@@ -73,23 +90,24 @@ void Shape::forPrint(std::ostream& out){
     }
     out<<"Цвет "<<col.r<<" "<<col.g<<" "<<col.b<<std::endl;
 }
+
 void Shape::mouseMoveEvent(QGraphicsSceneMouseEvent *event) {
     this->setPos(mapToScene(event->pos()));
     this->cent.x = mapToScene(event->pos()).x();
     this->cent.y = mapToScene(event->pos()).y();
-    std::cout << this->cent.x << ' ' << this->cent.y << std::endl;
+
 }
 
 void Shape::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     this->setCursor(QCursor(Qt::ClosedHandCursor));
-    std::cout << "Mouse press event" << std::endl;
+    TreeNode<Shape *> *parent = owner_node_;
     Q_UNUSED(event)
 }
 void Shape::mouseReleaseEvent(QGraphicsSceneMouseEvent *event) {
     this->setCursor(QCursor(Qt::ArrowCursor));
     Q_UNUSED(event)
-    std::cout << "Mouse release event" << std::endl;
 }
+
 QDataStream& operator<<(QDataStream& stream, const Shape& shape) {
     shape.saveToStream(stream);
     return stream;

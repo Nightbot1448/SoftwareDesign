@@ -13,4 +13,10 @@ public:
             : BTException(msg) {}
 };
 
+class NonBTElement : public BTException {
+public:
+    inline explicit NonBTElement(const char *msg)
+            : BTException(msg) {}
+};
+
 #endif //SOFTWARE_DESIGN_EMPYERRORBT_H

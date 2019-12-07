@@ -24,7 +24,9 @@ public:
     void clear(T* node);
     void clear();
 
-	void push(T *);
+	size_t size();
+
+	T* push(T *);
 	T* pop();
     ~BinaryTree();
 };
@@ -53,7 +55,7 @@ T* BinaryTree<T>::root() const {
 }
 
 template <typename T>
-void BinaryTree<T>::push(T *elem) {
+T* BinaryTree<T>::push(T* elem) {
 	if (root_) {
 		std::queue<T*> current;
 		current.push(root_);
@@ -66,9 +68,9 @@ void BinaryTree<T>::push(T *elem) {
 				if (el->left()) {
 					next.push(el->left());
 				}
-				else { 
+				else {
 					el->left(elem);
-					return;
+					return el;
 				}
 				if (el->right()) {
 					next.push(el->right());
@@ -76,7 +78,7 @@ void BinaryTree<T>::push(T *elem) {
 				else
 				{
 					el->right(elem);
-					return;
+					return el;
 				}
 			}
 			queue_sz = next.size();
@@ -85,6 +87,7 @@ void BinaryTree<T>::push(T *elem) {
 	}
 	else {
 		root_ = elem;
+		return nullptr;
 	}
 }
 
@@ -112,10 +115,10 @@ T* BinaryTree<T>::pop() {
 
 				if (current_sz != 2 * previous_sz) {
 					if (current_sz % 2) {
-						previous[current_sz / 2]->left() = nullptr;
+						previous[(current_sz - 1) / 2]->left() = nullptr;
 					}
 					else {
-						previous[current_sz / 2]->right() = nullptr;
+						previous[(current_sz - 1) / 2]->right() = nullptr;
 					}
 					return current.back();
 				}
@@ -133,6 +136,26 @@ T* BinaryTree<T>::pop() {
 	}
 	else
 		throw EmptyErrorBT("pop from empty tree");
+}
+
+template <typename T>
+size_t BinaryTree<T>::size() {
+	if (!root_)
+		return 0;
+	std::queue<T*> queue_;
+	queue_.push(root_);
+	size_t count = 0;
+	while (queue_.size())
+	{
+		auto el = queue_.front();
+		queue_.pop();
+		++count;
+		if (el->left())
+			queue_.push(el->left());
+		if (el->right())
+			queue_.push(el->right());
+	}
+	return count;
 }
 
 template <typename T>

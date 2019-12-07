@@ -9,6 +9,7 @@ class TreeNode{
     T elem_;
     TreeNode *left_;
     TreeNode *right_;
+    TreeNode *parent_;
     QGraphicsObject *left_line_;
     QGraphicsObject *right_line_;
 public:
@@ -26,6 +27,9 @@ public:
     void left(T left);
     void left(TreeNode *left);
 
+    TreeNode *getParent();
+    void setParent(TreeNode *);
+
     QGraphicsObject *getLeftLine();
     void setLeftLine(QGraphicsObject *);
 
@@ -39,13 +43,13 @@ public:
 };
 
 template<typename T>
-TreeNode<T>::TreeNode(T base) : elem_(base), left_(nullptr), right_(nullptr){}
+TreeNode<T>::TreeNode(T base) : elem_(base), left_(nullptr), right_(nullptr), parent_(nullptr), left_line_(nullptr), right_line_(nullptr){}
 
 template<typename T>
-TreeNode<T>::TreeNode(T base, TreeNode* left, TreeNode* right) : elem_(base), left_(left), right_(right){}
+TreeNode<T>::TreeNode(T base, TreeNode* left, TreeNode* right) : elem_(base), left_(left), right_(right), parent_(nullptr), left_line_(nullptr), right_line_(nullptr){}
 
 template<typename T>
-TreeNode<T>::TreeNode(T base, TreeNode *elem, bool is_right) : elem_(base) {
+TreeNode<T>::TreeNode(T base, TreeNode *elem, bool is_right) : elem_(base), parent_(nullptr), left_line_(nullptr), right_line_(nullptr) {
     if (is_right)
     {
         left_ = nullptr;
@@ -98,6 +102,15 @@ void TreeNode<T>::setLeftLine(QGraphicsObject *l){
 template<typename T>
 QGraphicsObject *TreeNode<T>::getRightLine(){
     return right_line_;
+}
+
+template<typename T>
+TreeNode<T> *TreeNode<T>::getParent(){
+    return parent_;
+}
+template<typename T>
+void TreeNode<T>::setParent(TreeNode *p){
+    parent_ = p;
 }
 
 template<typename T>

@@ -45,3 +45,4 @@ Makefile*
 debug
 release
 .qmake.stash
+SD_lab2.vcx*

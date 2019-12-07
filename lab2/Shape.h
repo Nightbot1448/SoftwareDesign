@@ -4,6 +4,7 @@
 #include <QGraphicsObject>
 #include <QGraphicsSceneMouseEvent>
 #include "includes.h"
+#include "TreeNode.h"
 
 class FiguresScene;
 
@@ -23,6 +24,12 @@ public:
     Colour getColour() const;
     virtual void print(std::ostream& out) = 0;
 
+    QGraphicsScene *getCurrentScene();
+    void setCurrentScene(QGraphicsScene *);
+
+    TreeNode<Shape *> *getOwnerNode();
+    void setOwnerNode(TreeNode<Shape *> *n);
+
     friend std::ostream& operator<<(std::ostream& out, Shape& sh){
         sh.forPrint(out);
         sh.print(out);
@@ -37,6 +44,9 @@ protected:
     std:: vector<Point> pts;
     QRectF figureRect;
     QRectF boundingRect() const override;
+
+    TreeNode<Shape *> *owner_node_;
+    QGraphicsScene *parrent_scene_;
 
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;

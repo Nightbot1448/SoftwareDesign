@@ -16,14 +16,12 @@ public:
 	BinaryTree();
     explicit BinaryTree(T *base);
 
-//	BinaryTreeIterator<T> iterator();
-
 	T* root() const;
     void print_klp();
     void clear(T* node);
     void clear();
     T*  push(T *); //return parent pointer
-	T* pop();
+    T* pop();
 
     size_t size();
 
@@ -85,51 +83,130 @@ T *BinaryTree<T>::push(T *elem) {
 	}
 }
 
+//template <typename T>
+//T* BinaryTree<T>::getParrent(T* child){
+//    if(!root_)
+//        return 0;
+//    if(root_ == child)
+//        return nullptr;
+//    std::queue<T *> queue_;
+//    queue_.push(root_);
+//    while(queue_.size())
+//    {
+//        auto el = queue_.front();
+//        queue_.pop();
+//        if(el->left())
+//        {
+//            if(el->left() == child)
+//                return el;
+//            queue_.push(el->left());
+//        }
+//        if(el->right())
+//        {
+//            if(el->right() == child)
+//                return el;
+//            queue_.push(el->right());
+//        }
+//    }
+//    throw NonBTElement("element isn't part of tree"/*, this, child*/);
+//}
+
+//template <typename T>
+//std::pair<T*, T*> BinaryTree<T>::pop() {
+//	if (root_) {
+//		if (root_->left()) {
+//			std::deque<T*> current;
+//			current.push_back(root_);
+//			while (true)
+//			{
+//				std::deque<T*> previous;
+//				previous = current;
+//				current.clear();
+//				for (auto el : previous) {
+//					if (el->left()) {
+//						current.push_back(el->left());
+//					}
+//					if (el->right()) {
+//						current.push_back(el->right());
+//					}
+//				}
+//				size_t previous_sz = previous.size();
+//				size_t current_sz = current.size();
+
+//				if (current_sz != 2 * previous_sz) {
+//                    TreeNode<Shape *> *parent = previous[(current_sz-1) / 2];
+//                    if (current_sz % 2) {
+//                        parent->left() = nullptr;
+//					}
+//					else {
+//                        parent->right() = nullptr;
+//					}
+//                    return std::make_pair(current.back(), parent);
+//				}
+//				else if (!(current.front()->left())) {
+//                    auto parent = previous.back();
+//                    parent->right() = nullptr;
+//                    return std::make_pair(current.back(), parent);
+//				}
+//			}
+//		}
+//		else {
+//			auto for_return = root_;
+//			root_ = nullptr;
+//            return std::make_pair(for_return, nullptr);
+//		}
+//	}
+//	else
+//		throw EmptyErrorBT("pop from empty tree");
+//}
+
 template <typename T>
 T* BinaryTree<T>::pop() {
-	if (root_) {
-		if (root_->left()) {
-			std::deque<T*> current;
-			current.push_back(root_);
-			while (true)
-			{
-				std::deque<T*> previous;
-				previous = current;
-				current.clear();
-				for (auto el : previous) {
-					if (el->left()) {
-						current.push_back(el->left());
-					}
-					if (el->right()) {
-						current.push_back(el->right());
-					}
-				}
-				size_t previous_sz = previous.size();
-				size_t current_sz = current.size();
+    if (root_) {
+        if (root_->left()) {
+            std::deque<T*> current;
+            current.push_back(root_);
+            while (true)
+            {
+                std::deque<T*> previous;
+                previous = current;
+                current.clear();
+                for (auto el : previous) {
+                    if (el->left()) {
+                        current.push_back(el->left());
+                    }
+                    if (el->right()) {
+                        current.push_back(el->right());
+                    }
+                }
+                size_t previous_sz = previous.size();
+                size_t current_sz = current.size();
 
-				if (current_sz != 2 * previous_sz) {
-					if (current_sz % 2) {
-						previous[current_sz / 2]->left() = nullptr;
-					}
-					else {
-						previous[current_sz / 2]->right() = nullptr;
-					}
-					return current.back();
-				}
-				else if (!(current.front()->left())) {
-					previous.back()->right() = nullptr;
-					return current.back();
-				}
-			}
-		}
-		else {
-			auto for_return = root_;
-			root_ = nullptr;
-			return for_return;
-		}
-	}
-	else
-		throw EmptyErrorBT("pop from empty tree");
+                if (current_sz != 2 * previous_sz) {
+                    TreeNode<Shape *> *parent = previous[(current_sz-1) / 2];
+                    if (current_sz % 2) {
+                        parent->left() = nullptr;
+                    }
+                    else {
+                        parent->right() = nullptr;
+                    }
+                    return current.back();
+                }
+                else if (!(current.front()->left())) {
+                    auto parent = previous.back();
+                    parent->right() = nullptr;
+                    return current.back();
+                }
+            }
+        }
+        else {
+            auto for_return = root_;
+            root_ = nullptr;
+            return for_return;
+        }
+    }
+    else
+        throw EmptyErrorBT("pop from empty tree");
 }
 
 template <typename T>
